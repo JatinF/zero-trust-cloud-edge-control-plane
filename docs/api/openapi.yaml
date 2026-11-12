@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Zero Trust Cloud and Edge Control Plane
+  version: 0.1.0
+  description: Administrative API for the synthetic Cedar lab. Every path requires a bearer token.
+paths:
+  /v1/tenants:
+    post:
+      summary: Create tenant
+      responses:
+        "200":
+          description: Created
+  /v1/policies:
+    post:
+      summary: Create policy
+      responses:
+        "200":
+          description: Created
+  /v1/policies/{id}/publish:
+    post:
+      summary: Publish a signed immutable revision
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Published
+  /v1/policies/{id}/versions:
+    get:
+      summary: Revision history for the caller tenant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: History
+  /v1/edges:
+    get:
+      summary: Edge sites and synchronization status
+      responses:
+        "200":
+          description: Edges
+  /v1/edges/{id}/endpoints:
+    get:
+      summary: Endpoints registered at an edge
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Endpoints
+  /v1/discovery/jobs:
+    post:
+      summary: Start an authorized simulator inventory job
+      responses:
+        "200":
+          description: Job
+  /v1/assets:
+    get:
+      summary: Search discovered resources
+      responses:
+        "200":
+          description: Assets
+  /v1/access-requests:
+    post:
+      summary: Request privileged access
+      responses:
+        "200":
+          description: Pending request
+  /v1/access-requests/{id}/approve:
+    post:
+      summary: Approve a scoped grant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Grant
+  /v1/access-requests/{id}/revoke:
+    post:
+      summary: Revoke a grant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Revoked
+  /v1/audit/events:
+    get:
+      summary: Query audit records for the caller tenant
+      responses:
+        "200":
+          description: Events
+  /v1/gates:
+    get:
+      summary: Report integrations that were not executed
+      responses:
+        "200":
+          description: Gates
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []

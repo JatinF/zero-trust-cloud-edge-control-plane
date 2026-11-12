@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package security.endpoint.v1;
+
+option go_package = "github.com/JatinF/zero-trust-cloud-edge-control-plane/gen/endpoint/v1;endpointv1";
+
+// EndpointService records which revision an endpoint activated.
+// endpoint_id and edge_id must match the authenticated peer.
+service EndpointService {
+  rpc ReportStatus(StatusReport) returns (StatusAck);
+}
+
+message StatusReport {
+  string endpoint_id = 1;
+  string edge_id = 2;
+  uint64 active_revision = 3;
+  string digest = 4;
+}
+
+message StatusAck {
+  bool accepted = 1;
+}

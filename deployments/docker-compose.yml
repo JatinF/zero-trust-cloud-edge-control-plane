@@ -1,0 +1,22 @@
+# This file was not started.
+# postgres:16-alpine, redis:7-alpine, and nats:2-alpine were not pulled on the authoring workstation.
+# The tested path uses an in-memory store, an in-memory log, and an in-memory cache.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: zt
+      POSTGRES_PASSWORD: zt-lab
+      POSTGRES_DB: zt
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  nats:
+    image: nats:2-alpine
+    command: ["-js"]
+    ports:
+      - "4222:4222"

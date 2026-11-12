@@ -1,0 +1,6 @@
+# Not applied.
+replicaCount: 1
+image: zero-trust-cloud-edge-control-plane:ci
+tenant: SYN-TENANT-CEDAR
+service:
+  port: 8080

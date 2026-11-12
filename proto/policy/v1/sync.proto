@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package security.policy.v1;
+
+option go_package = "github.com/JatinF/zero-trust-cloud-edge-control-plane/gen/policy/v1;policyv1";
+
+// PolicySyncService distributes signed policy snapshots.
+// The server binds tenant_id and edge_id to the mTLS peer.
+// Values in the request do not choose the tenant on their own.
+service PolicySyncService {
+  rpc Subscribe(SubscribeRequest) returns (stream PolicyNotification);
+  rpc FetchBundle(BundleRequest) returns (stream BundleChunk);
+  rpc Acknowledge(AckRequest) returns (AckResponse);
+}
+
+message SubscribeRequest {
+  string tenant_id = 1;
+  string edge_id = 2;
+  uint64 active_revision = 3;
+}
+
+message PolicyNotification {
+  string policy_id = 1;
+  uint64 revision = 2;
+  string bundle_digest = 3;
+}
+
+message BundleRequest {
+  string policy_id = 1;
+  uint64 revision = 2;
+}
+
+message BundleChunk {
+  bytes payload = 1;
+}
+
+message AckRequest {
+  string edge_id = 1;
+  string policy_id = 2;
+  uint64 revision = 3;
+  string activated_digest = 4;
+}
+
+message AckResponse {
+  bool accepted = 1;
+}

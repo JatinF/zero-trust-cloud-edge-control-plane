@@ -1,0 +1,21 @@
+# Rendered only if a later operator installs the chart. It was not installed.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: control-plane
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: control-plane
+  template:
+    metadata:
+      labels:
+        app: control-plane
+    spec:
+      containers:
+        - name: control-plane
+          image: {{ .Values.image }}
+          args: ["health"]
+          ports:
+            - containerPort: {{ .Values.service.port }}

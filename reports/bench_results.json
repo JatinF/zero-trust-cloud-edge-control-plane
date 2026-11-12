@@ -1,0 +1,1 @@
+{"go":"go1.26.4","os":"windows","arch":"amd64","cpus":8,"authz_samples":2000,"authz_p50_us":998,"authz_p95_us":2049,"authz_max_us":10231,"sync_samples":8,"sync_p50_ms":29.492,"sync_p95_ms":32.199,"endpoints":300,"price":"none","measurement":"In-process on this workstation. Not a network deployment and not a pass gate."}

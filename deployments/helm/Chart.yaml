@@ -1,0 +1,6 @@
+apiVersion: v2
+name: zero-trust-cloud-edge-control-plane
+description: Unapplied chart for the synthetic control plane. Helm was not installed and this chart was not installed.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

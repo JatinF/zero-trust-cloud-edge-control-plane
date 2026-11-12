@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package security.discovery.v1;
+
+option go_package = "github.com/JatinF/zero-trust-cloud-edge-control-plane/gen/discovery/v1;discoveryv1";
+
+// DiscoveryService accepts inventory from a known simulator connector.
+// It does not dial arbitrary networks.
+service DiscoveryService {
+  rpc ReportAssets(AssetReport) returns (AssetAck);
+}
+
+message AssetReport {
+  string job_id = 1;
+  string connector = 2;
+  repeated Asset assets = 3;
+}
+
+message Asset {
+  string asset_id = 1;
+  string asset_type = 2;
+  string source = 3;
+}
+
+message AssetAck {
+  uint32 accepted = 1;
+}

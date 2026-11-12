@@ -1,0 +1,9 @@
+service: control-plane
+tenant_id: SYN-TENANT-CEDAR
+grant_ttl: 5m
+low_risk_offline_ttl: 30m
+high_risk_offline_ttl: 5m
+chunk_bytes: 128
+max_bundle_bytes: 1048576
+worker_pool: 4
+simulated_endpoints: 300
